@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!-- Parent -->
+  <parent>
+    <groupId>org.jboss</groupId>
+    <artifactId>jboss-parent</artifactId>
+    <version>8</version>
+    <relativePath />
+  </parent>
+
+  <!-- Model Version -->
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- Artifact Configuration -->
+  <groupId>org.jboss.arquillian.extension</groupId>
+  <artifactId>arquillian-portal-parent</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Arquillian Portal Extension Agreggator</name>
+  <description>Extension for portlet testing in portal containers (GateIn)</description>
+
+  <developers>
+    <developer>
+      <name>Ken Finnigan</name>
+      <timezone>UTC+5</timezone>
+      <email>ken@kenfinnigan.me</email>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://git@github.com:kenfinnigan/arquillian-extension-portal.git</connection>
+    <developerConnection>scm:git:ssh://github.com/kenfinnigan/arquillian-extension-portal.git</developerConnection>
+    <url>git://github.com/kenfinnigan/arquillian-extension-portal.git</url>
+  </scm>
+
+  <properties>
+    <!-- Versioning -->
+    <version.arquillian.core>1.0.0.Final</version.arquillian.core>
+
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <pushChanges>false</pushChanges>
+          <localCheckout>true</localCheckout>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- Modules -->
+  <modules>
+    <module>api</module>
+    <module>spi</module>
+    <module>impl-base</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.jboss.arquillian</groupId>
+        <artifactId>arquillian-bom</artifactId>
+        <version>${version.arquillian.core}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.arquillian</groupId>
+        <artifactId>arquillian-build</artifactId>
+        <version>${version.arquillian.core}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>
