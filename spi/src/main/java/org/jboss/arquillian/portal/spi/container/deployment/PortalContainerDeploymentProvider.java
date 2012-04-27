@@ -30,7 +30,5 @@ import org.jboss.shrinkwrap.api.Archive;
  */
 public interface PortalContainerDeploymentProvider {
 
-    boolean provides();
-
     Archive<?> build();
 }

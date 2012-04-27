@@ -66,13 +66,11 @@ public class PortalURLResourceProvider extends URLResourceProvider {
     private URL toURL(URL original) {
         Collection<PortalURLProvider> providers = loader.get().all(PortalURLProvider.class);
         for (PortalURLProvider provider : providers) {
-            if (provider.customizes()) {
-                try {
-                    return provider.customizeURL(original);
-                } catch (Exception e) {
-                    throw new RuntimeException("Failed to create portal specific url based on " + original
-                        + " from provider: " + provider, e);
-                }
+            try {
+                return provider.customizeURL(original);
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to create portal specific url based on " + original
+                    + " from provider: " + provider, e);
             }
         }
         return original;

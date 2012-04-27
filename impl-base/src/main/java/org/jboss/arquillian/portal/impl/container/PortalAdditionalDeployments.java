@@ -49,12 +49,10 @@ public class PortalAdditionalDeployments {
             PortalContainerDeploymentProvider.class);
 
         for (PortalContainerDeploymentProvider provider : providers) {
-            if (provider.provides()) {
-                Archive<?> tmp = provider.build();
-                portalContainerDeployments.add(tmp);
-                afterStartEvent.getDeployableContainer().deploy(tmp);
-                tmp = null;
-            }
+            Archive<?> tmp = provider.build();
+            portalContainerDeployments.add(tmp);
+            afterStartEvent.getDeployableContainer().deploy(tmp);
+            tmp = null;
         }
     }
 

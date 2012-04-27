@@ -30,7 +30,5 @@ import java.net.URL;
  */
 public interface PortalURLProvider {
 
-    boolean customizes();
-
     URL customizeURL(URL archiveURL) throws Exception;
 }
