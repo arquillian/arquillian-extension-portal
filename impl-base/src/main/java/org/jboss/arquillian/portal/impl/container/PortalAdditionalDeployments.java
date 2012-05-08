@@ -40,8 +40,7 @@ public class PortalAdditionalDeployments {
     Collection<Archive<?>> portalContainerDeployments = new ArrayList<Archive<?>>();
 
     public void deployPortal(@Observes AfterStart afterStartEvent) throws DeploymentException {
-        Collection<PortalContainerDeploymentProvider> providers = loader.get().all(
-            PortalContainerDeploymentProvider.class);
+        Collection<PortalContainerDeploymentProvider> providers = loader.get().all(PortalContainerDeploymentProvider.class);
 
         for (PortalContainerDeploymentProvider provider : providers) {
             Archive<?> tmp = provider.build();

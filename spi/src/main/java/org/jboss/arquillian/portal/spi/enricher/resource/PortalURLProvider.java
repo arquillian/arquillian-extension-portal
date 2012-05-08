@@ -20,7 +20,7 @@ import java.net.URL;
 
 /**
  * PortalURLProvider
- * 
+ *
  * @author <a href="mailto:ken@kenfinnigan.me">Ken Finnigan</a>
  */
 public interface PortalURLProvider {

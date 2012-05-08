@@ -63,8 +63,8 @@ public class PortalURLResourceProvider extends URLResourceProvider {
             try {
                 return provider.customizeURL(original);
             } catch (Exception e) {
-                throw new RuntimeException("Failed to create portal specific url based on " + original
-                    + " from provider: " + provider, e);
+                throw new RuntimeException("Failed to create portal specific url based on " + original + " from provider: "
+                        + provider, e);
             }
         }
         return original;

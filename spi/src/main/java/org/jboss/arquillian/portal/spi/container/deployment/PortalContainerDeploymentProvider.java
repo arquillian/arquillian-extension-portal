@@ -20,7 +20,7 @@ import org.jboss.shrinkwrap.api.Archive;
 
 /**
  * PortalContainerDeploymentProvider
- * 
+ *
  * @author <a href="mailto:ken@kenfinnigan.me">Ken Finnigan</a>
  */
 public interface PortalContainerDeploymentProvider {
