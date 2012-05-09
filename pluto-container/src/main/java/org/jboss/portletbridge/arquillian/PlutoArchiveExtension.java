@@ -39,8 +39,8 @@ public class PlutoArchiveExtension implements LoadableExtension {
      */
     @Override
     public void register(ExtensionBuilder builder) {
-        builder.service(DeploymentScenarioGenerator.class, PlutoDeploymentGenerator.class).service(PortalURLProvider.class,
-                PlutoURLProvider.class);
+        builder.service(DeploymentScenarioGenerator.class, PlutoDeploymentGenerator.class)
+               .service(PortalURLProvider.class, PlutoURLProvider.class);
     }
 
 }
