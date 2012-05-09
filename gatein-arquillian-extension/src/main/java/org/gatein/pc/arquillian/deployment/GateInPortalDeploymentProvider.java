@@ -41,7 +41,7 @@ public class GateInPortalDeploymentProvider implements PortalContainerDeployment
     public Archive<?> build() {
         Collection<WebArchive> portalContainer = DependencyResolvers.use(MavenDependencyResolver.class)
                 .loadEffectivePom("pom.xml")
-                .artifact("org.jboss.portletbridge.testing:gatein-portal-container:war:jboss-as7:1.0.0-SNAPSHOT")
+                .artifact("org.jboss.portletbridge.testing.gatein:gatein-portal-container:war:jboss-as7:1.0.0.Alpha1")
                 .resolveAs(WebArchive.class);
         return portalContainer.iterator().next();
     }
