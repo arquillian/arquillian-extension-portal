@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <!-- Parent -->
+    <parent>
+        <groupId>org.jboss.portletbridge.testing.gatein</groupId>
+        <artifactId>gatein-testing-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <!-- Model Version -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Artifact Configuration -->
+    <artifactId>gatein-portal-container</artifactId>
+    <packaging>war</packaging>
+    <name>GateIn Portal Container Web Archive for Tests</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.portletbridge.testing</groupId>
+            <artifactId>as7-extension</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.gatein.pc</groupId>
+            <artifactId>pc-controller</artifactId>
+            <version>${version.pc}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>junit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jsp-api</artifactId>
+                    <groupId>javax.servlet.jsp</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.gatein.pc</groupId>
+            <artifactId>pc-test-core</artifactId>
+            <version>${version.pc}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jboss-unit</artifactId>
+                    <groupId>org.jboss.unit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jboss-unit-remote</artifactId>
+                    <groupId>org.jboss.unit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jboss-unit-tooling-ant</artifactId>
+                    <groupId>org.jboss.unit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>portal-test</artifactId>
+                    <groupId>org.jboss.unit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>portal-test-generic</artifactId>
+                    <groupId>org.jboss.unit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>maven-ant-tasks</artifactId>
+                    <groupId>org.apache.maven</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jboss-remoting</artifactId>
+                    <groupId>org.jboss.remoting</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-httpclient</artifactId>
+                    <groupId>commons-httpclient</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jboss-logging-jdk</artifactId>
+                    <groupId>org.jboss.logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jboss-logging-log4j</artifactId>
+                    <groupId>org.jboss.logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>junit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.gatein.wci</groupId>
+            <artifactId>wci-tomcat6</artifactId>
+            <version>${version.wci}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>catalina</artifactId>
+                    <groupId>org.apache.tomcat</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.gatein.wci</groupId>
+            <artifactId>wci-jboss7</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+                    <groupId>org.jboss.spec.javax.servlet</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.5.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <classifier>jboss-as7</classifier>
+                    <packagingExcludes>WEB-INF/lib/wci-tomcat6-*.jar,WEB-INF/lib/jbossweb*.jar</packagingExcludes>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
