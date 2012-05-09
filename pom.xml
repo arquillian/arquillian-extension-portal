@@ -116,12 +116,12 @@
         <dependencies>
             <!-- Project dependencies -->
             <dependency>
-                <groupId>org.jboss.portletbridge.testing</groupId>
-                <artifactId>as7-extension</artifactId>
+                <groupId>org.jboss.portletbridge.testing.gatein</groupId>
+                <artifactId>gatein-as7-extension</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.jboss.portletbridge.testing</groupId>
+                <groupId>org.jboss.portletbridge.testing.gatein</groupId>
                 <artifactId>gatein-portal-container</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>

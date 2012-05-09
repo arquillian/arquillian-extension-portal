@@ -19,8 +19,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.jboss.portletbridge.testing</groupId>
-            <artifactId>as7-extension</artifactId>
+            <groupId>org.jboss.portletbridge.testing.gatein</groupId>
+            <artifactId>gatein-as7-extension</artifactId>
         </dependency>
 
         <dependency>
