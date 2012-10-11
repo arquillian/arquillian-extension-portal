@@ -7,10 +7,10 @@
 Currently it supports:
 
 * Injection of portal specific @ArquillianResource URL with @PortalURL
-* Ability for portal containers to add extra deployments into the container prior to deployment of the test archive
+* Ability for portlet containers to add extra deployments into the runtime container prior to deployment of the test archive
 
-On it's own this extension doesn't do much, so you will need a portal container specific implementation of this extension
-to use it. Implementations for GateIn and Pluto portal containers can be found at
+On it's own this extension doesn't do much, so you will need a portlet container specific implementation of this extension
+to use it. Implementations for GateIn and Pluto portlet containers can be found at
 [JBoss Portlet Bridge](http://github.com/jbossportletbridge).
 
 ### Code example

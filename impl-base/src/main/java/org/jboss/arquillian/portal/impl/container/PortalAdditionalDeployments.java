@@ -26,7 +26,7 @@ import org.jboss.arquillian.core.api.Instance;
 import org.jboss.arquillian.core.api.annotation.Inject;
 import org.jboss.arquillian.core.api.annotation.Observes;
 import org.jboss.arquillian.core.spi.ServiceLoader;
-import org.jboss.arquillian.portal.spi.container.deployment.PortalContainerDeploymentProvider;
+import org.jboss.arquillian.portal.spi.container.deployment.PortletContainerDeploymentProvider;
 import org.jboss.shrinkwrap.api.Archive;
 
 /**
@@ -37,21 +37,21 @@ public class PortalAdditionalDeployments {
     @Inject
     Instance<ServiceLoader> loader;
 
-    Collection<Archive<?>> portalContainerDeployments = new ArrayList<Archive<?>>();
+    Collection<Archive<?>> deployments = new ArrayList<Archive<?>>();
 
     public void deployPortal(@Observes AfterStart afterStartEvent) throws DeploymentException {
-        Collection<PortalContainerDeploymentProvider> providers = loader.get().all(PortalContainerDeploymentProvider.class);
+        Collection<PortletContainerDeploymentProvider> providers = loader.get().all(PortletContainerDeploymentProvider.class);
 
-        for (PortalContainerDeploymentProvider provider : providers) {
+        for (PortletContainerDeploymentProvider provider : providers) {
             Archive<?> tmp = provider.build();
-            portalContainerDeployments.add(tmp);
+            deployments.add(tmp);
             afterStartEvent.getDeployableContainer().deploy(tmp);
             tmp = null;
         }
     }
 
     public void undeployPortal(@Observes BeforeStop beforeStopEvent) throws DeploymentException {
-        for (Archive<?> archive : portalContainerDeployments) {
+        for (Archive<?> archive : deployments) {
             beforeStopEvent.getDeployableContainer().undeploy(archive);
         }
     }
