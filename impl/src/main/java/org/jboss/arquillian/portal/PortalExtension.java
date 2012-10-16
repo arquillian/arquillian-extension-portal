@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.arquillian.portal.impl;
+package org.jboss.arquillian.portal;
 
 import org.jboss.arquillian.container.test.impl.enricher.resource.URLResourceProvider;
 import org.jboss.arquillian.core.spi.LoadableExtension;

@@ -55,7 +55,7 @@
     <modules>
         <module>api</module>
         <module>spi</module>
-        <module>impl-base</module>
+        <module>impl</module>
         <module>depchain</module>
     </modules>
 

@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-portal-impl-base</artifactId>
+            <artifactId>arquillian-portal-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
