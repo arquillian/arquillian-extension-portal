@@ -1,1 +1,1 @@
-org.jboss.arquillian.portal.impl.PortalExtension
+org.jboss.arquillian.portal.PortalExtension

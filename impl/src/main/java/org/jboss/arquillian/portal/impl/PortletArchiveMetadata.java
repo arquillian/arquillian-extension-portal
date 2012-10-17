@@ -14,16 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.arquillian.portal.spi.enricher.resource;
+package org.jboss.arquillian.portal.impl;
 
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * PortalURLProvider
- *
- * @author <a href="mailto:ken@kenfinnigan.me">Ken Finnigan</a>
+ * @author <a href="http://community.jboss.org/people/kenfinni">Ken Finnigan</a>
  */
-public interface PortalURLProvider {
+public class PortletArchiveMetadata {
 
-    URL customizeURL(URL archiveURL, String... portlets) throws Exception;
+    private List<String> portletNames = new ArrayList<String>();
+
+    public List<String> getPortletNames() {
+        return portletNames;
+    }
+
+    public void setPortletNames(List<String> portletNames) {
+        this.portletNames = portletNames;
+    }
+
+    public void addPortletName(String portletName) {
+        this.portletNames.add(portletName);
+    }
 }

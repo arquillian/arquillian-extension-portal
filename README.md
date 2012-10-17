@@ -7,16 +7,22 @@
 Currently it supports:
 
 * Injection of portal specific @ArquillianResource URL with @PortalURL
+* @PortalURL supports following values:
+** null or "" - URL to page with all deployed portlets on a single page
+** "MyPortlet" - URL to page with only "MyPortlet" loaded
+** {"MyPortlet", "YourPortlet"} - URL to page with listed portlets on a single page.
 * Ability for portlet containers to add extra deployments into the runtime container prior to deployment of the test archive
+* @PortalTest marker annotation on test class to allow special processing by container specific implementations
 
 On it's own this extension doesn't do much, so you will need a portlet container specific implementation of this extension
 to use it. Implementations for GateIn and Pluto portlet containers can be found at
 [JBoss Portlet Bridge](http://github.com/jbossportletbridge).
 
 ### Code example
----
+--- 
 
     @RunWith(Arquillian.class)
+    @PortalTest
     public class PortletTest {
         @Deployment
         public static Archive<?> createDeployment() {
@@ -35,20 +41,22 @@ to use it. Implementations for GateIn and Pluto portlet containers can be found 
                 .addAsWebResource("resources/stylesheet.css", "resources/stylesheet.css");
         }
 
+        protected static final By OUTPUT_FIELD = By.id("output");
+
         @ArquillianResource
         @PortalURL
         URL portalURL;
 
+        @Drone
+        WebDriver browser;
+
         @Test
         @RunAsClient
         public void renderFacesPortlet() throws Exception {
-            WebClient client = new WebClient();
-            client.setAjaxController(new NicelyResynchronizingAjaxController());
-            HtmlPage body = webClient.getPage(portalURL.toExternalForm());
-            HtmlElement element = body.getElementById("output");
-            assertNotNull("Check what page contains output element", element);
-            Assert.assertThat("Verify that the portlet was deployed and returns the expected result", element.asText(),
-                containsString(Bean.HELLO_JSF_PORTLET));
+            browser.get(portalURL.toString());
+            assertNotNull("Check that page contains output element", browser.findElement(OUTPUT_FIELD));
+            assertTrue("Portlet should return: " + Bean.HELLO_JSF_PORTLET,
+                ExpectedConditions.textToBePresentInElement(OUTPUT_FIELD, Bean.HELLO_JSF_PORTLET).apply(driver));
         }
     }
 

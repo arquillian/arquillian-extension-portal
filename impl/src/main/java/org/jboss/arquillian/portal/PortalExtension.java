@@ -17,8 +17,10 @@
 package org.jboss.arquillian.portal;
 
 import org.jboss.arquillian.container.test.impl.enricher.resource.URLResourceProvider;
+import org.jboss.arquillian.container.test.spi.client.deployment.ApplicationArchiveProcessor;
 import org.jboss.arquillian.core.spi.LoadableExtension;
 import org.jboss.arquillian.portal.impl.container.PortalAdditionalDeployments;
+import org.jboss.arquillian.portal.impl.deployment.PortletXMLProcessor;
 import org.jboss.arquillian.portal.impl.enricher.resource.PortalURLResourceProvider;
 import org.jboss.arquillian.test.spi.enricher.resource.ResourceProvider;
 
@@ -33,6 +35,8 @@ public class PortalExtension implements LoadableExtension {
     @Override
     public void register(ExtensionBuilder builder) {
         builder.override(ResourceProvider.class, URLResourceProvider.class, PortalURLResourceProvider.class);
+
+        builder.service(ApplicationArchiveProcessor.class, PortletXMLProcessor.class);
 
         builder.observer(PortalAdditionalDeployments.class);
     }

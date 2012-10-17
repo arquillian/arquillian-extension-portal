@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.arquillian.portal.api;
+package org.jboss.arquillian.portal;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
@@ -33,4 +33,5 @@ import java.lang.annotation.Target;
 @Target({ ElementType.FIELD, ElementType.PARAMETER })
 public @interface PortalURL {
 
+    String[] value() default "";
 }

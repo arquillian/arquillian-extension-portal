@@ -24,7 +24,8 @@ import org.jboss.arquillian.container.test.impl.enricher.resource.URLResourcePro
 import org.jboss.arquillian.core.api.Instance;
 import org.jboss.arquillian.core.api.annotation.Inject;
 import org.jboss.arquillian.core.spi.ServiceLoader;
-import org.jboss.arquillian.portal.api.PortalURL;
+import org.jboss.arquillian.portal.PortalURL;
+import org.jboss.arquillian.portal.impl.PortletArchiveMetadata;
 import org.jboss.arquillian.portal.spi.enricher.resource.PortalURLProvider;
 import org.jboss.arquillian.test.api.ArquillianResource;
 
@@ -36,11 +37,16 @@ public class PortalURLResourceProvider extends URLResourceProvider {
     @Inject
     Instance<ServiceLoader> loader;
 
+    @Inject
+    Instance<PortletArchiveMetadata> portletMetadata;
+
     @Override
     public Object doLookup(ArquillianResource resource, Annotation... qualifiers) {
         boolean found = false;
+        PortalURL portalURL = null;
         for (Annotation annotation : qualifiers) {
-            if (annotation.annotationType() == PortalURL.class) {
+            if(PortalURL.class.isAssignableFrom(annotation.annotationType())) {
+                portalURL = PortalURL.class.cast(annotation);
                 found = true;
                 break;
             }
@@ -50,23 +56,35 @@ public class PortalURLResourceProvider extends URLResourceProvider {
             return super.doLookup(resource, qualifiers);
         }
 
-        return locateURL(resource, qualifiers);
+        return locateURL(resource, qualifiers, portalURL);
     }
 
-    private Object locateURL(ArquillianResource resource, Annotation[] qualifiers) {
-        return toURL((URL) super.doLookup(resource, qualifiers));
+    private Object locateURL(ArquillianResource resource, Annotation[] qualifiers, PortalURL portalURL) {
+        return toURL((URL) super.doLookup(resource, qualifiers), portalURL);
     }
 
-    private URL toURL(URL original) {
+    private URL toURL(URL original, PortalURL portalURL) {
         Collection<PortalURLProvider> providers = loader.get().all(PortalURLProvider.class);
+        String[] portlets = getPortletList(portalURL);
         for (PortalURLProvider provider : providers) {
             try {
-                return provider.customizeURL(original);
+                return provider.customizeURL(original, portlets);
             } catch (Exception e) {
                 throw new RuntimeException("Failed to create portal specific url based on " + original + " from provider: "
                         + provider, e);
             }
         }
         return original;
+    }
+
+    private String[] getPortletList(PortalURL portalURL) {
+        String[] portlets = portalURL.value();
+        if (portlets.length > 0 && portlets[0].length() > 0) {
+            return portlets;
+        }
+
+        // Default behavior when no portlets specified, retrieve all portlets from portlet.xml
+        portlets = portletMetadata.get().getPortletNames().toArray(portlets);
+        return portlets;
     }
 }
