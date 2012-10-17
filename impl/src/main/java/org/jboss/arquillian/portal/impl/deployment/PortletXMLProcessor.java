@@ -16,13 +16,15 @@
  */
 package org.jboss.arquillian.portal.impl.deployment;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 import org.jboss.arquillian.container.test.spi.client.deployment.ApplicationArchiveProcessor;
 import org.jboss.arquillian.core.api.InstanceProducer;
 import org.jboss.arquillian.core.api.annotation.Inject;
-import org.jboss.arquillian.portal.PortalTest;
+import org.jboss.arquillian.portal.api.PortalURL;
 import org.jboss.arquillian.portal.impl.PortletArchiveMetadata;
+import org.jboss.arquillian.portal.impl.enricher.resource.PortalURLResourceProvider;
 import org.jboss.arquillian.test.spi.TestClass;
 import org.jboss.arquillian.test.spi.annotation.ClassScoped;
 import org.jboss.shrinkwrap.api.Archive;
@@ -31,8 +33,8 @@ import org.jboss.shrinkwrap.descriptor.api.portletapp20.PortletDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.portletapp20.PortletType;
 
 /**
- * Reads the portlet.xml contents to provide a list of portlet names in a file that is accessible
- * to the Extension when running in container.
+ * Reads the portlet.xml contents to provide a list of portlet names that is passed to the container implementation by
+ * {@link PortalURLResourceProvider} during {@link @PortalURL} enrichment.
  *
  * @author <a href="http://community.jboss.org/people/kenfinni">Ken Finnigan</a>
  */
@@ -47,17 +49,25 @@ public class PortletXMLProcessor implements ApplicationArchiveProcessor {
      */
     @Override
     public void process(Archive<?> applicationArchive, TestClass testClass) {
-        if (testClass.isAnnotationPresent(PortalTest.class)) {
-            PortletDescriptor portletXml = Descriptors.importAs(PortletDescriptor.class).fromStream(
-                    applicationArchive.get("WEB-INF/portlet.xml").getAsset().openStream());
+        for (Field field : testClass.getJavaClass().getDeclaredFields()) {
+            if (field.isAnnotationPresent(PortalURL.class)) {
+                PortletDescriptor portletXml;
+                try {
+                    portletXml = Descriptors.importAs(PortletDescriptor.class).fromStream(
+                            applicationArchive.get("WEB-INF/portlet.xml").getAsset().openStream());
 
-            if (null != portletXml) {
-                PortletArchiveMetadata metadata = new PortletArchiveMetadata();
-                List<PortletType<PortletDescriptor>> portlets = portletXml.getAllPortlet();
-                for (PortletType<PortletDescriptor> portlet : portlets) {
-                    metadata.addPortletName(portlet.getPortletName());
+                    if (null != portletXml) {
+                        PortletArchiveMetadata metadata = new PortletArchiveMetadata();
+                        List<PortletType<PortletDescriptor>> portlets = portletXml.getAllPortlet();
+                        for (PortletType<PortletDescriptor> portlet : portlets) {
+                            metadata.addPortletName(portlet.getPortletName());
+                        }
+                        portletMetadata.set(metadata);
+                    }
+                    break;
+                } catch (Exception e) {
+                    throw new IllegalArgumentException("Unable to retrieve portlet.xml from Deployment", e);
                 }
-                portletMetadata.set(metadata);
             }
         }
     }

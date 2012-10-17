@@ -24,7 +24,7 @@ import org.jboss.arquillian.container.test.impl.enricher.resource.URLResourcePro
 import org.jboss.arquillian.core.api.Instance;
 import org.jboss.arquillian.core.api.annotation.Inject;
 import org.jboss.arquillian.core.spi.ServiceLoader;
-import org.jboss.arquillian.portal.PortalURL;
+import org.jboss.arquillian.portal.api.PortalURL;
 import org.jboss.arquillian.portal.impl.PortletArchiveMetadata;
 import org.jboss.arquillian.portal.spi.enricher.resource.PortalURLProvider;
 import org.jboss.arquillian.test.api.ArquillianResource;

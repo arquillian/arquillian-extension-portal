@@ -14,24 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.arquillian.portal;
-
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+package org.jboss.arquillian.portal.api;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author <a href="mailto:ken@kenfinnigan.me">Ken Finnigan</a>
+ * Specifies that a given test class should be considered to be a Portal Test.
+ *
+ * @author <a href="http://community.jboss.org/people/kenfinni">Ken Finnigan</a>
  */
-@Inherited
 @Documented
-@Retention(RUNTIME)
-@Target({ ElementType.FIELD, ElementType.PARAMETER })
-public @interface PortalURL {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface PortalTest {
 
-    String[] value() default "";
 }

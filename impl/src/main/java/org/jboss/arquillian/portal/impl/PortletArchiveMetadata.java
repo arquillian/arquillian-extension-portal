@@ -30,10 +30,6 @@ public class PortletArchiveMetadata {
         return portletNames;
     }
 
-    public void setPortletNames(List<String> portletNames) {
-        this.portletNames = portletNames;
-    }
-
     public void addPortletName(String portletName) {
         this.portletNames.add(portletName);
     }
