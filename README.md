@@ -8,9 +8,9 @@ Currently it supports:
 
 * Injection of portal specific @ArquillianResource URL with @PortalURL
 * @PortalURL supports following values:
-** null or "" - URL to page with all deployed portlets on a single page
-** "MyPortlet" - URL to page with only "MyPortlet" loaded
-** {"MyPortlet", "YourPortlet"} - URL to page with listed portlets on a single page.
+    * null or "" - URL to page with all deployed portlets on a single page
+    * "MyPortlet" - URL to page with only "MyPortlet" loaded
+    * {"MyPortlet", "YourPortlet"} - URL to page with listed portlets on a single page.
 * Ability for portlet containers to add extra deployments into the runtime container prior to deployment of the test archive
 * @PortalTest marker annotation on test class to allow special processing by container specific implementations
 
