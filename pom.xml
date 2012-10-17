@@ -20,15 +20,11 @@
     <description>Provides deployable WAR of GateIn Portal Container for testing portlets</description>
 
     <properties>
-        <version.pc>2.3.1-GA</version.pc>
-        <version.wci>2.1.1-GA</version.wci>
-        <version.wci.jboss7>2.2.0-Beta01-SNAPSHOT</version.wci.jboss7>
-
         <!-- Testing versions -->
         <version.junit>4.10</version.junit>
-        <version.arquillian>1.0.0.Final</version.arquillian>
-        <version.shrinkwrap.resolver>2.0.0-alpha-1</version.shrinkwrap.resolver>
-        <version.arquillian.portal.extension>1.0.0.Alpha1</version.arquillian.portal.extension>
+        <version.arquillian>1.0.2.Final</version.arquillian>
+        <version.shrinkwrap.resolver>2.0.0-alpha-4</version.shrinkwrap.resolver>
+        <version.arquillian.portal.extension>1.0.0.Alpha2</version.arquillian.portal.extension>
 
         <!-- Plugin versions -->
         <version.plugin.surefire>2.12</version.plugin.surefire>
@@ -57,8 +53,6 @@
 
     <!-- Modules -->
     <modules>
-        <module>gatein-as7-extension</module>
-        <module>gatein-portal-container</module>
         <module>gatein-arquillian-extension</module>
     </modules>
 
@@ -88,7 +82,7 @@
                 <configuration>
                     <rules>
                         <requireMavenVersion>
-                            <version>[3.0.0,)</version>
+                            <version>[3.0.4,)</version>
                         </requireMavenVersion>
                         <requireJavaVersion>
                             <version>1.6.0</version> <!-- Must be JDK6 -->
@@ -113,19 +107,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Project dependencies -->
-            <dependency>
-                <groupId>org.jboss.portletbridge.testing.gatein</groupId>
-                <artifactId>gatein-as7-extension</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.portletbridge.testing.gatein</groupId>
-                <artifactId>gatein-portal-container</artifactId>
-                <version>${project.version}</version>
-                <type>war</type>
-            </dependency>
-
             <!-- Spec dependencies -->
             <dependency>
                 <groupId>javax.portlet</groupId>
@@ -136,13 +117,6 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>2.5</version>
-            </dependency>
-
-            <!-- GateIn dependencies -->
-            <dependency>
-                <groupId>org.gatein.wci</groupId>
-                <artifactId>wci-jboss7</artifactId>
-                <version>${version.wci.jboss7}</version>
             </dependency>
 
             <!-- Test dependencies -->

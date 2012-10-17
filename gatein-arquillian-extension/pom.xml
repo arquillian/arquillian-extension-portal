@@ -16,6 +16,10 @@
     <packaging>jar</packaging>
     <name>GateIn Arquillian Extension</name>
 
+    <properties>
+        <version.pc>2.4.0.Beta02</version.pc>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
@@ -34,11 +38,6 @@
 
         <dependency>
             <groupId>org.jboss.shrinkwrap.descriptors</groupId>
-            <artifactId>shrinkwrap-descriptors-api-javaee</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.descriptors</groupId>
             <artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
         </dependency>
 
@@ -49,9 +48,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.gatein.wci</groupId>
-            <artifactId>wci-wci</artifactId>
-            <version>${version.wci}</version>
+            <groupId>org.gatein.pc</groupId>
+            <artifactId>pc-embed</artifactId>
+            <version>${version.pc}</version>
         </dependency>
     </dependencies>
 

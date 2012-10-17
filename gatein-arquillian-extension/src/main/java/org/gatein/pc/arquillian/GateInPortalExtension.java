@@ -21,10 +21,10 @@
  */
 package org.gatein.pc.arquillian;
 
-import org.gatein.pc.arquillian.deployment.GateInPortalDeploymentProvider;
+import org.gatein.pc.arquillian.deployment.GateInDeploymentEnricher;
 import org.gatein.pc.arquillian.enricher.resource.GateInURLProvider;
+import org.jboss.arquillian.container.test.spi.client.deployment.ApplicationArchiveProcessor;
 import org.jboss.arquillian.core.spi.LoadableExtension;
-import org.jboss.arquillian.portal.spi.container.deployment.PortalContainerDeploymentProvider;
 import org.jboss.arquillian.portal.spi.enricher.resource.PortalURLProvider;
 
 /**
@@ -37,8 +37,11 @@ public class GateInPortalExtension implements LoadableExtension {
      */
     @Override
     public void register(ExtensionBuilder builder) {
-        builder.service(PortalContainerDeploymentProvider.class, GateInPortalDeploymentProvider.class)
-               .service(PortalURLProvider.class, GateInURLProvider.class);
+        // Deployment enrichment
+        builder.service(ApplicationArchiveProcessor.class, GateInDeploymentEnricher.class);
+
+        // Portal URL enrichment
+        builder.service(PortalURLProvider.class, GateInURLProvider.class);
     }
 
 }

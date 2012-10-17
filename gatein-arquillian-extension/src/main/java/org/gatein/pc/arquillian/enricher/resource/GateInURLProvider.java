@@ -22,10 +22,10 @@
 package org.gatein.pc.arquillian.enricher.resource;
 
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import org.gatein.pc.arquillian.deployment.GateInDeploymentEnricher;
 import org.jboss.arquillian.portal.spi.enricher.resource.PortalURLProvider;
 
 /**
@@ -36,13 +36,19 @@ public class GateInURLProvider implements PortalURLProvider {
     /**
      * @throws URISyntaxException
      * @throws MalformedURLException
-     * @see org.jboss.arquillian.portal.spi.enricher.resource.PortalURLProvider#customizeURL(java.net.URL)
+     * @see org.jboss.arquillian.portal.spi.enricher.resource.PortalURLProvider#customizeURL(java.net.URL, String...)
      */
     @Override
-    public URL customizeURL(URL archiveURL) throws Exception {
-        String path = "/gatein/portal" + archiveURL.getPath();
-        return new URI(archiveURL.getProtocol(), null, archiveURL.getHost(), archiveURL.getPort(), path, archiveURL.getQuery(),
-                null).toURL();
+    public URL customizeURL(URL archiveURL, String... portlets) throws Exception {
+        StringBuilder portletPath = new StringBuilder(150);
+        for (String portlet : portlets) {
+            if (null != portlet && portlet.length() > 0) {
+                portletPath.append("/");
+                portletPath.append(portlet);
+            }
+        }
+        URL url = archiveURL.toURI().resolve(GateInDeploymentEnricher.EMBED_PATH + portletPath.toString()).toURL();
+        return url;
     }
 
 }
