@@ -22,11 +22,10 @@ limitations under the License.
     xmlns="http://portals.apache.org/pluto/xsd/pluto-portal-driver-config.xsd"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://portals.apache.org/pluto/xsd/pluto-portal-driver-config.xsd
-                        http://portals.apache.org/pluto/xsd/pluto-portal-driver-config.xsd"
-	version="1.1">
+                        http://portals.apache.org/pluto/xsd/pluto-portal-driver-config.xsd">
 
   <portal-name>pluto-portal-driver</portal-name>
-  <portal-version>1.1.4</portal-version>
+  <portal-version>2.0.3</portal-version>
   <container-name>Pluto Portal Driver</container-name>
 
   <supports>

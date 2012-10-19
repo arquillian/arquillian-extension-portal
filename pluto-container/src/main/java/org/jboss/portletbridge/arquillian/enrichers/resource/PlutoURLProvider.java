@@ -21,7 +21,6 @@
  */
 package org.jboss.portletbridge.arquillian.enrichers.resource;
 
-import java.net.URI;
 import java.net.URL;
 
 import org.jboss.arquillian.portal.spi.enricher.resource.PortalURLProvider;
@@ -35,10 +34,8 @@ public class PlutoURLProvider implements PortalURLProvider {
      * @see org.jboss.arquillian.portal.spi.enricher.resource.PortalURLProvider#customizeURL(java.net.URL)
      */
     @Override
-    public URL customizeURL(URL archiveURL) throws Exception {
-        String path = archiveURL.getPath() + "portal/";
-        return new URI(archiveURL.getProtocol(), null, archiveURL.getHost(), archiveURL.getPort(), path, archiveURL.getQuery(),
-                null).toURL();
+    public URL customizeURL(URL archiveURL, String... portletNames) throws Exception {
+        return archiveURL.toURI().resolve("portal").toURL();
     }
 
 }

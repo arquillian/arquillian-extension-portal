@@ -41,15 +41,6 @@
 		<url-pattern>/portal/*</url-pattern>
 	</filter-mapping>
 	<servlet>
-		<servlet-name>integrationTest</servlet-name>
-		<servlet-class>org.apache.pluto.container.driver.PortletServlet</servlet-class>
-		<init-param>
-			<param-name>portlet-name</param-name>
-			<param-value>integrationTest</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet>
 		<servlet-name>plutoPortalDriver</servlet-name>
 		<servlet-class>org.apache.pluto.driver.PortalDriverServlet</servlet-class>
 		<load-on-startup>3</load-on-startup>
@@ -57,10 +48,6 @@
 	<servlet-mapping>
 		<servlet-name>plutoPortalDriver</servlet-name>
 		<url-pattern>/portal/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>integrationTest</servlet-name>
-		<url-pattern>/PlutoInvoker/integrationTest</url-pattern>
 	</servlet-mapping>
 	<!-- The container taglibs that invoke our portlet in the portlet container -->
 	<jsp-config>

@@ -21,14 +21,14 @@
  */
 package org.jboss.portletbridge.arquillian;
 
-import org.jboss.arquillian.container.test.spi.client.deployment.DeploymentScenarioGenerator;
+import org.jboss.arquillian.container.test.spi.client.deployment.ApplicationArchiveProcessor;
 import org.jboss.arquillian.core.spi.LoadableExtension;
 import org.jboss.arquillian.portal.spi.enricher.resource.PortalURLProvider;
-import org.jboss.portletbridge.arquillian.deployment.PlutoDeploymentGenerator;
+import org.jboss.portletbridge.arquillian.deployment.PlutoDeploymentEnricher;
 import org.jboss.portletbridge.arquillian.enrichers.resource.PlutoURLProvider;
 
 /**
- * Registers {@link PlutoDeploymentGenerator} as {@link DeploymentScenarioGenerator} with Arquillian.
+ * Registers extensions to Arquillian for the Pluto Container.
  * 
  * @author kenfinnigan
  */
@@ -39,8 +39,9 @@ public class PlutoArchiveExtension implements LoadableExtension {
      */
     @Override
     public void register(ExtensionBuilder builder) {
-        builder.service(DeploymentScenarioGenerator.class, PlutoDeploymentGenerator.class)
-               .service(PortalURLProvider.class, PlutoURLProvider.class);
+        builder.service(ApplicationArchiveProcessor.class, PlutoDeploymentEnricher.class);
+
+        builder.service(PortalURLProvider.class, PlutoURLProvider.class);
     }
 
 }

@@ -45,7 +45,6 @@ public class CustomRenderServiceImpl extends RenderConfigServiceImpl {
     public CustomRenderServiceImpl(ResourceConfig config) {
         super(config);
         pages = new ArrayList<PageConfig>();
-        init(org.apache.pluto.driver.PortalStartupListener.getServletContext());
     }
 
     public void addPage(PageConfig arg0) {
