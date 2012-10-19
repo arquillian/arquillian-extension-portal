@@ -14,7 +14,7 @@
     <!-- Artifact Configuration -->
     <groupId>org.jboss.portletbridge.testing.pluto</groupId>
     <artifactId>pluto-testing-parent</artifactId>
-    <version>1.0.0.Alpha2</version>
+    <version>1.0.0.Final-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Pluto Testing, parent pom</name>
     <description>Provides Pluto portal container bundled with Jetty for testing portlets</description>
