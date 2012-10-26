@@ -17,7 +17,7 @@
     <name>GateIn Arquillian Extension</name>
 
     <properties>
-        <version.pc>2.4.0.Beta02</version.pc>
+        <version.pc>2.4.0.Beta03</version.pc>
     </properties>
 
     <dependencies>
