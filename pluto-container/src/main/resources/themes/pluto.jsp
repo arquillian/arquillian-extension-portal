@@ -2,9 +2,6 @@
 <html>
 <head>
     <title>Pluto Portal</title>
-    <style type="text/css" title="currentStyle" media="screen">
-        @import "<c:out value="${pageContext.request.contextPath}"/>/portlet-spec-1.0.css";
-    </style>
 </head>
 <body>
 <div id="portal">
