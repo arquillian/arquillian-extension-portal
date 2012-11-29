@@ -51,9 +51,9 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:git:git@github.com:jbossportletbridge/pluto-testing.git</connection>
-        <developerConnection>scm:git:git@github.com:jbossportletbridge/pluto-testing.git</developerConnection>
-        <url>https://github.com/jbossportletbridge/pluto-testing</url>
+        <connection>scm:git:git@github.com:portletbridge/pluto-testing.git</connection>
+        <developerConnection>scm:git:git@github.com:portletbridge/pluto-testing.git</developerConnection>
+        <url>https://github.com/portletbridge/pluto-testing</url>
     </scm>
 
     <!-- Modules -->
