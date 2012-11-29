@@ -46,9 +46,9 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:git:git@github.com:jbossportletbridge/gatein-testing.git</connection>
-        <developerConnection>scm:git:git@github.com:jbossportletbridge/gatein-testing.git</developerConnection>
-        <url>https://github.com/jbossportletbridge/gatein-testing</url>
+        <connection>scm:git:git@github.com:portletbridge/gatein-testing.git</connection>
+        <developerConnection>scm:git:git@github.com:portletbridge/gatein-testing.git</developerConnection>
+        <url>https://github.com/portletbridge/gatein-testing</url>
     </scm>
 
     <!-- Modules -->
