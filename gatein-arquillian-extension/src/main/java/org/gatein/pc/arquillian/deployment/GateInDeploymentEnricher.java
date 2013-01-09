@@ -16,19 +16,23 @@
  */
 package org.gatein.pc.arquillian.deployment;
 
-import java.io.File;
-
 import org.jboss.arquillian.container.test.spi.client.deployment.ApplicationArchiveProcessor;
 import org.jboss.arquillian.portal.api.PortalTest;
 import org.jboss.arquillian.test.spi.TestClass;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ArchivePath;
 import org.jboss.shrinkwrap.api.ArchivePaths;
+import org.jboss.shrinkwrap.api.Node;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.webfragment30.WebFragmentDescriptor;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+
+import java.io.File;
 
 /**
  * @author <a href="http://community.jboss.org/people/kenfinni">Ken Finnigan</a>
@@ -38,6 +42,7 @@ public class GateInDeploymentEnricher implements ApplicationArchiveProcessor {
     public static final String EMBED_PATH = "embed";
 
     private static final String EMBED_SERVLET_NAME = "EmbedServlet";
+    private static final String EMBED_SERVLET_CLASS = "org.gatein.pc.embed.EmbedServlet";
 
     private static final ArchivePath WEB_XML_PATH = ArchivePaths.create("WEB-INF/web.xml");
 
@@ -64,22 +69,48 @@ public class GateInDeploymentEnricher implements ApplicationArchiveProcessor {
                                  .withoutTransitivity()
                                  .as(File.class);
                 webArchive.addAsLibraries(files);
+
                 // Add EmbedServlet to web.xml
-                WebAppDescriptor webXml = Descriptors.importAs(WebAppDescriptor.class).fromStream(
-                        applicationArchive.get(WEB_XML_PATH).getAsset().openStream());
-
-                // SHRINKWRAP-187, too eager on not allowing overrides, delete it first
-                webArchive.delete(WEB_XML_PATH);
-
-                webArchive.setWebXML(new StringAsset(addEmbedToDescriptor(webXml).exportAsString()));
+                addEmbed(webArchive);
             }
         }
+    }
+
+    private void addEmbed(WebArchive webArchive) {
+        Node webXmlNode = webArchive.get(WEB_XML_PATH);
+        if (null != webXmlNode) {
+            WebAppDescriptor webXml = Descriptors.importAs(WebAppDescriptor.class).fromStream(webXmlNode.getAsset().openStream());
+
+            // SHRINKWRAP-187, too eager on not allowing overrides, delete it first
+            webArchive.delete(WEB_XML_PATH);
+
+            webArchive.setWebXML(new StringAsset(addEmbedToDescriptor(webXml).exportAsString()));
+        } else {
+            // No web.xml present so add Embed Servlet to web fragment
+            WebFragmentDescriptor webFrag = Descriptors.create(WebFragmentDescriptor.class);
+            JavaArchive jar = ShrinkWrap.create(JavaArchive.class);
+            jar.addAsManifestResource(new StringAsset(addEmbedToFragment(webFrag).exportAsString()), "web-fragment.xml");
+            webArchive.addAsLibrary(jar);
+        }
+    }
+
+    private WebFragmentDescriptor addEmbedToFragment(WebFragmentDescriptor webFragment) {
+        webFragment.createServlet()
+                        .servletName(EMBED_SERVLET_NAME)
+                        .servletClass(EMBED_SERVLET_CLASS)
+                        .loadOnStartup(0)
+                        .up()
+                    .createServletMapping()
+                        .servletName(EMBED_SERVLET_NAME)
+                        .urlPattern("/" + EMBED_PATH + "/*")
+                        .up();
+        return webFragment;
     }
 
     private WebAppDescriptor addEmbedToDescriptor(WebAppDescriptor webXml) {
         webXml.createServlet()
                   .servletName(EMBED_SERVLET_NAME)
-                  .servletClass("org.gatein.pc.embed.EmbedServlet")
+                  .servletClass(EMBED_SERVLET_CLASS)
                   .loadOnStartup(0)
                   .up()
               .createServletMapping()
