@@ -22,7 +22,9 @@
 
     <properties>
         <!-- Versioning -->
-        <version.arquillian.core>1.0.2.Final</version.arquillian.core>
+        <version.arquillian.core>1.0.3.Final</version.arquillian.core>
+        <version.shrinkwrap>1.1.0</version.shrinkwrap>
+        <version.shrinkwrap.descriptor>2.0.0-alpha-4</version.shrinkwrap.descriptor>
     </properties>
 
     <developers>
@@ -57,6 +59,8 @@
         <module>spi</module>
         <module>impl</module>
         <module>depchain</module>
+        <module>shrinkwrap/api</module>
+        <module>shrinkwrap/impl</module>
     </modules>
 
     <build>
@@ -75,6 +79,13 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                <artifactId>shrinkwrap-descriptors-bom</artifactId>
+                <version>${version.shrinkwrap.descriptor}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
                 <version>${version.arquillian.core}</version>
@@ -87,6 +98,21 @@
                 <version>${version.arquillian.core}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap</groupId>
+                <artifactId>shrinkwrap-api</artifactId>
+                <version>${version.shrinkwrap}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap</groupId>
+                <artifactId>shrinkwrap-impl-base</artifactId>
+                <version>${version.shrinkwrap}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap</groupId>
+                <artifactId>shrinkwrap-spi</artifactId>
+                <version>${version.shrinkwrap}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
