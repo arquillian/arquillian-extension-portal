@@ -11,6 +11,8 @@ import org.jboss.shrinkwrap.portal.api.PortletArchive;
 import org.jboss.shrinkwrap.portal.api.PortletMode;
 import org.jboss.shrinkwrap.portal.impl.container.PortletContainerBase;
 
+import javax.portlet.Portlet;
+
 /**
  * @author <a href="http://community.jboss.org/people/kenfinni">Ken Finnigan</a>
  */
@@ -139,7 +141,7 @@ public class PortletArchiveImpl extends PortletContainerBase<PortletArchive> imp
     }
 
     @Override
-    public PortletArchive createSimplePortlet(Class<?> portletClass) {
+    public PortletArchive createSimplePortlet(Class<? extends Portlet> portletClass) {
         String name = portletClass.getSimpleName();
 
         PortletDescriptor desc = getOrCreatePortletDescriptor()
@@ -162,7 +164,7 @@ public class PortletArchiveImpl extends PortletContainerBase<PortletArchive> imp
     }
 
     @Override
-    public PortletArchive createSimplePortlet(Class<?> portletClass, String name, String title) {
+    public PortletArchive createSimplePortlet(Class<? extends Portlet> portletClass, String name, String title) {
         PortletDescriptor desc = getOrCreatePortletDescriptor()
                 .createPortlet()
                     .portletName(name)
@@ -183,7 +185,7 @@ public class PortletArchiveImpl extends PortletContainerBase<PortletArchive> imp
     }
 
     @Override
-    public PortletArchive createSimplePortlet(Class<?> portletClass, String name, String title, String mimeType, PortletMode... modes) {
+    public PortletArchive createSimplePortlet(Class<? extends Portlet> portletClass, String name, String title, String mimeType, PortletMode... modes) {
         PortletDescriptor desc = getOrCreatePortletDescriptor()
                 .createPortlet()
                     .portletName(name)

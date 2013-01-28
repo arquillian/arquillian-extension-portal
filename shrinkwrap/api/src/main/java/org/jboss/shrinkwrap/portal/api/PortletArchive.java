@@ -7,6 +7,8 @@ import org.jboss.shrinkwrap.api.container.ServiceProviderContainer;
 import org.jboss.shrinkwrap.api.container.WebContainer;
 import org.jboss.shrinkwrap.portal.api.container.PortletContainer;
 
+import javax.portlet.Portlet;
+
 /**
  * Traditional WAR (Java Web Archive) structure. Used in construction of portlet applications.
  *
@@ -15,11 +17,11 @@ import org.jboss.shrinkwrap.portal.api.container.PortletContainer;
 public interface PortletArchive extends Archive<PortletArchive>, LibraryContainer<PortletArchive>, WebContainer<PortletArchive>,
         PortletContainer<PortletArchive>, ResourceContainer<PortletArchive>, ServiceProviderContainer<PortletArchive> {
 
-    PortletArchive createSimplePortlet(Class<?> portletClass);
+    PortletArchive createSimplePortlet(Class<? extends Portlet> portletClass);
 
-    PortletArchive createSimplePortlet(Class<?> portletClass, String name, String title);
+    PortletArchive createSimplePortlet(Class<? extends Portlet> portletClass, String name, String title);
 
-    PortletArchive createSimplePortlet(Class<?> portletClass, String name, String title, String mimeType, PortletMode... modes);
+    PortletArchive createSimplePortlet(Class<? extends Portlet> portletClass, String name, String title, String mimeType, PortletMode... modes);
 
     PortletArchive createFacesPortlet(String name);
 
