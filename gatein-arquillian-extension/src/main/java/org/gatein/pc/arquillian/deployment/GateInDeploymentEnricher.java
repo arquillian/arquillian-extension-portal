@@ -58,14 +58,14 @@ public class GateInDeploymentEnricher implements ApplicationArchiveProcessor {
                 // Add GateIn PC Embed and Deps to WEB-INF/lib
                 File[] files = Maven.resolver()
                                         .loadPomFromFile("pom.xml")
-                                        .resolve("org.gatein.pc:pc-embed:2.4.0.Beta02")
+                                        .resolve("org.gatein.pc:pc-embed")
                                         .withTransitivity()
                                         .as(File.class);
                 webArchive.addAsLibraries(files);
 
                 files = Maven.resolver()
                                  .loadPomFromFile("pom.xml")
-                                 .resolve("javax.portlet:portlet-api:2.0")
+                                 .resolve("javax.portlet:portlet-api")
                                  .withoutTransitivity()
                                  .as(File.class);
                 webArchive.addAsLibraries(files);

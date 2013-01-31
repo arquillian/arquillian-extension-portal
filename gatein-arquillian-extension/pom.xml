@@ -16,10 +16,6 @@
     <packaging>jar</packaging>
     <name>GateIn Arquillian Extension</name>
 
-    <properties>
-        <version.pc>2.4.1.CR01</version.pc>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
@@ -45,12 +41,6 @@
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.gatein.pc</groupId>
-            <artifactId>pc-embed</artifactId>
-            <version>${version.pc}</version>
         </dependency>
     </dependencies>
 
