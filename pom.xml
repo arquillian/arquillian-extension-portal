@@ -14,7 +14,7 @@
     <!-- Artifact Configuration -->
     <groupId>org.jboss.portletbridge.testing.gatein</groupId>
     <artifactId>gatein-testing-parent</artifactId>
-    <version>1.0.0.Beta2</version>
+    <version>1.0.0.Final-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>GateIn Testing, parent pom</name>
     <description>Provides deployable WAR of GateIn Portal Container for testing portlets</description>
