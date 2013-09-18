@@ -55,10 +55,10 @@
 
     <!-- Modules -->
     <modules>
-        <module>api</module>
-        <module>spi</module>
-        <module>impl</module>
-        <module>depchain</module>
+        <module>portal/api</module>
+        <module>portal/spi</module>
+        <module>portal/impl</module>
+        <module>portal/depchain</module>
         <module>shrinkwrap/api</module>
         <module>shrinkwrap/impl</module>
     </modules>
