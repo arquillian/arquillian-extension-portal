@@ -6,6 +6,7 @@ import org.jboss.arquillian.test.spi.TestClass;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.portal.api.PortletArchive;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,11 +16,10 @@ public class PortletArchiveGenerator extends AnnotationDeploymentScenarioGenerat
     @Override
     public List<DeploymentDescription> generate(TestClass testClass) {
         List<DeploymentDescription> deployments = super.generate(testClass);
+        List<DeploymentDescription> updatedDeployments = new ArrayList<DeploymentDescription>();
 
         for (DeploymentDescription currentDeploymentDescription : deployments) {
             if (currentDeploymentDescription.getArchive() instanceof PortletArchive) {
-                deployments.remove(currentDeploymentDescription);
-
                 DeploymentDescription newDescription = new DeploymentDescription(currentDeploymentDescription.getName(),
                         currentDeploymentDescription.getArchive().as(WebArchive.class));
                 newDescription.shouldBeTestable(currentDeploymentDescription.testable())
@@ -29,10 +29,12 @@ public class PortletArchiveGenerator extends AnnotationDeploymentScenarioGenerat
                                 .setProtocol(currentDeploymentDescription.getProtocol())
                                 .setExpectedException(currentDeploymentDescription.getExpectedException());
 
-                deployments.add(newDescription);
+                updatedDeployments.add(newDescription);
+            } else {
+                updatedDeployments.add(currentDeploymentDescription);
             }
         }
 
-        return deployments;
+        return updatedDeployments;
     }
 }
