@@ -36,8 +36,7 @@ public class PortalExtension implements LoadableExtension {
     public void register(ExtensionBuilder builder) {
         builder.override(ResourceProvider.class, URLResourceProvider.class, PortalURLResourceProvider.class);
 
-        builder.service(ApplicationArchiveProcessor.class, PortletXMLProcessor.class);
-
+        builder.observer(PortletXMLProcessor.class);
         builder.observer(PortalAdditionalDeployments.class);
     }
 

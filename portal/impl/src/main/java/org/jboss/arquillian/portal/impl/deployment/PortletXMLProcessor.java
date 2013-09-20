@@ -21,37 +21,40 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import org.jboss.arquillian.container.test.spi.client.deployment.ApplicationArchiveProcessor;
+import org.jboss.arquillian.container.spi.context.annotation.DeploymentScoped;
+import org.jboss.arquillian.container.spi.event.container.BeforeDeploy;
+import org.jboss.arquillian.core.api.Instance;
 import org.jboss.arquillian.core.api.InstanceProducer;
 import org.jboss.arquillian.core.api.annotation.Inject;
+import org.jboss.arquillian.core.api.annotation.Observes;
 import org.jboss.arquillian.portal.api.PortalURL;
 import org.jboss.arquillian.portal.impl.PortletArchiveMetadata;
 import org.jboss.arquillian.portal.impl.enricher.resource.PortalURLResourceProvider;
 import org.jboss.arquillian.test.spi.TestClass;
-import org.jboss.arquillian.test.spi.annotation.ClassScoped;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.portletapp20.PortletDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.portletapp20.PortletType;
 
 /**
- * Reads the portlet.xml contents to provide a list of portlet names that is passed to the container implementation by
+ * Reads the portlet.xml contents to provide a list of portlet names that is used by
  * {@link PortalURLResourceProvider} during {@link @PortalURL} enrichment.
  *
  * @author <a href="http://community.jboss.org/people/kenfinni">Ken Finnigan</a>
  */
-public class PortletXMLProcessor implements ApplicationArchiveProcessor {
+public class PortletXMLProcessor {
 
     @Inject
-    @ClassScoped
+    Instance<TestClass> testClassInstance;
+
+    @Inject
+    @DeploymentScoped
     InstanceProducer<PortletArchiveMetadata> portletMetadata;
 
-    /**
-     * @see org.jboss.arquillian.container.test.spi.client.deployment.ApplicationArchiveProcessor#process(org.jboss.shrinkwrap.api.Archive, org.jboss.arquillian.test.spi.TestClass)
-     */
-    @Override
-    public void process(Archive<?> applicationArchive, TestClass testClass) {
+    public void parsePortletXml(@Observes BeforeDeploy event) {
         boolean processed = false;
+        Archive applicationArchive = event.getDeployment().getArchive();
+        TestClass testClass = testClassInstance.get();
 
         for (Field field : testClass.getJavaClass().getDeclaredFields()) {
             if (field.isAnnotationPresent(PortalURL.class)) {
