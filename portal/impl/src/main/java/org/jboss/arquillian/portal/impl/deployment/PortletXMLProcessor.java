@@ -16,7 +16,9 @@
  */
 package org.jboss.arquillian.portal.impl.deployment;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.jboss.arquillian.container.test.spi.client.deployment.ApplicationArchiveProcessor;
@@ -49,27 +51,51 @@ public class PortletXMLProcessor implements ApplicationArchiveProcessor {
      */
     @Override
     public void process(Archive<?> applicationArchive, TestClass testClass) {
+        boolean processed = false;
+
         for (Field field : testClass.getJavaClass().getDeclaredFields()) {
             if (field.isAnnotationPresent(PortalURL.class)) {
-                PortletDescriptor portletXml;
-                try {
-                    portletXml = Descriptors.importAs(PortletDescriptor.class).fromStream(
-                            applicationArchive.get("WEB-INF/portlet.xml").getAsset().openStream());
-
-                    if (null != portletXml) {
-                        PortletArchiveMetadata metadata = new PortletArchiveMetadata();
-                        List<PortletType<PortletDescriptor>> portlets = portletXml.getAllPortlet();
-                        for (PortletType<PortletDescriptor> portlet : portlets) {
-                            metadata.addPortletName(portlet.getPortletName());
-                        }
-                        portletMetadata.set(metadata);
-                    }
+                processed = processPortletXml(applicationArchive);
+                if (processed) {
                     break;
-                } catch (Exception e) {
-                    throw new IllegalArgumentException("Unable to retrieve portlet.xml from Deployment", e);
+                }
+            }
+        }
+
+        if (!processed) {
+            for (Method method : testClass.getJavaClass().getDeclaredMethods()) {
+                Annotation[][] methodParameterAnnotations = method.getParameterAnnotations();
+                for (Annotation[] parameterAnnotations : methodParameterAnnotations) {
+                    for (Annotation annotation : parameterAnnotations) {
+                        if (annotation instanceof PortalURL) {
+                            processed = processPortletXml(applicationArchive);
+                            if (processed) {
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 
+    private boolean processPortletXml(Archive<?> applicationArchive) {
+        PortletDescriptor portletXml;
+        try {
+            portletXml = Descriptors.importAs(PortletDescriptor.class).fromStream(
+                    applicationArchive.get("WEB-INF/portlet.xml").getAsset().openStream());
+
+            if (null != portletXml) {
+                PortletArchiveMetadata metadata = new PortletArchiveMetadata();
+                List<PortletType<PortletDescriptor>> portlets = portletXml.getAllPortlet();
+                for (PortletType<PortletDescriptor> portlet : portlets) {
+                    metadata.addPortletName(portlet.getPortletName());
+                }
+                portletMetadata.set(metadata);
+            }
+            return true;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Unable to retrieve portlet.xml from Deployment", e);
+        }
+    }
 }
