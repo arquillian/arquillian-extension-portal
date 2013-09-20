@@ -24,6 +24,8 @@
         <version.junit>4.11</version.junit>
         <version.arquillian.core>1.1.1.Final</version.arquillian.core>
         <version.arquillian.graphene>2.0.0.Final</version.arquillian.graphene>
+        <version.arquillian.warp>1.0.0.Alpha4</version.arquillian.warp>
+        <version.shrinkwrap>1.1.2</version.shrinkwrap>
         <version.shrinkwrap.descriptor>2.0.0-alpha-5</version.shrinkwrap.descriptor>
         <version.shrinkwrap.resolver>2.0.0</version.shrinkwrap.resolver>
 
@@ -82,6 +84,9 @@
         <module>portal/impl/impl-pluto</module>
         <module>portal/impl/ftest</module>
         <module>portal/depchain</module>
+        <module>warp/api</module>
+        <module>warp/portlet</module>
+        <module>warp/jsf-portlet</module>
     </modules>
 
     <dependencyManagement>
@@ -218,6 +223,14 @@
                 <version>${version.portletbridge}</version>
             </dependency>
 
+            <!-- Warp -->
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-warp-bom</artifactId>
+                <version>${version.arquillian.warp}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
