@@ -15,7 +15,7 @@
     <!-- Artifact Configuration -->
     <groupId>org.jboss.arquillian.extension</groupId>
     <artifactId>arquillian-portal-parent</artifactId>
-    <version>1.0.0.Final-SNAPSHOT</version>
+    <version>1.1.0.Final-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Arquillian Portal Extension Agreggator</name>
     <description>Extension for portlet testing in portal containers</description>
