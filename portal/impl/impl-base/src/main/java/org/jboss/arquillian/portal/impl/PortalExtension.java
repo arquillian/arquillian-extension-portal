@@ -17,7 +17,6 @@
 package org.jboss.arquillian.portal.impl;
 
 import org.jboss.arquillian.container.test.impl.enricher.resource.URLResourceProvider;
-import org.jboss.arquillian.container.test.spi.client.deployment.ApplicationArchiveProcessor;
 import org.jboss.arquillian.core.spi.LoadableExtension;
 import org.jboss.arquillian.portal.impl.container.PortalAdditionalDeployments;
 import org.jboss.arquillian.portal.impl.deployment.PortletXMLProcessor;
