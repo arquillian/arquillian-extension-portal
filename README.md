@@ -14,12 +14,11 @@ Currently it supports:
 * Ability for portlet containers to add extra deployments into the runtime container prior to deployment of the test archive
 * `@PortalTest` marker annotation on test class to allow special processing by container specific implementations
 
-On it's own this extension doesn't do much, so you will need a portlet container specific implementation of this extension
-to use it. Implementations for GateIn and Pluto portlet containers can be found at
-[Portlet Bridge](http://github.com/portletbridge).
+As part of the extension we provide implementations for the following portlet containers:
+* GateIn
 
 ### Code example
---- 
+---
 
     @RunWith(Arquillian.class)
     @PortalTest

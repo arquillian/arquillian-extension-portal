@@ -3,18 +3,19 @@
 
     <!-- Parent -->
     <parent>
-        <groupId>org.jboss.portletbridge.testing.gatein</groupId>
-        <artifactId>gatein-testing-parent</artifactId>
-        <version>1.0.0.Final-SNAPSHOT</version>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-portal-parent</artifactId>
+        <version>1.1.0.Final-SNAPSHOT</version>
+        <relativePath>../../../pom.xml</relativePath>
     </parent>
 
     <!-- Model Version -->
     <modelVersion>4.0.0</modelVersion>
 
     <!-- Artifact Configuration -->
-    <artifactId>gatein-arquillian-extension</artifactId>
+    <artifactId>arquillian-portal-impl-gatein</artifactId>
     <packaging>jar</packaging>
-    <name>GateIn Arquillian Extension</name>
+    <name>Arquillian Portal Extension Implementation for GateIn</name>
 
     <dependencies>
         <dependency>
@@ -35,12 +36,6 @@
         <dependency>
             <groupId>org.jboss.shrinkwrap.descriptors</groupId>
             <artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 

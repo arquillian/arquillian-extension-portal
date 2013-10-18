@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source.
- * Copyright 2012, Red Hat, Inc., and individual contributors
+ * Copyright 2013, Red Hat, Inc., and individual contributors
  * as indicated by the @author tags. See the copyright.txt file in the
  * distribution for a full listing of individual contributors.
  *
@@ -19,29 +19,36 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.gatein.pc.arquillian;
+package org.jboss.arquillian.portal.impl.gatein.enricher.resource;
 
-import org.gatein.pc.arquillian.deployment.GateInDeploymentEnricher;
-import org.gatein.pc.arquillian.enricher.resource.GateInURLProvider;
-import org.jboss.arquillian.container.test.spi.client.deployment.ApplicationArchiveProcessor;
-import org.jboss.arquillian.core.spi.LoadableExtension;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
+import org.jboss.arquillian.portal.impl.gatein.deployment.GateInDeploymentEnricher;
 import org.jboss.arquillian.portal.spi.enricher.resource.PortalURLProvider;
 
 /**
  * @author <a href="mailto:ken@kenfinnigan.me">Ken Finnigan</a>
  */
-public class GateInPortalExtension implements LoadableExtension {
+public class GateInURLProvider implements PortalURLProvider {
 
     /**
-     * @see org.jboss.arquillian.core.spi.LoadableExtension#register(org.jboss.arquillian.core.spi.LoadableExtension.ExtensionBuilder)
+     * @throws URISyntaxException
+     * @throws MalformedURLException
+     * @see org.jboss.arquillian.portal.spi.enricher.resource.PortalURLProvider#customizeURL(java.net.URL, String...)
      */
     @Override
-    public void register(ExtensionBuilder builder) {
-        // Deployment enrichment
-        builder.service(ApplicationArchiveProcessor.class, GateInDeploymentEnricher.class);
-
-        // Portal URL enrichment
-        builder.service(PortalURLProvider.class, GateInURLProvider.class);
+    public URL customizeURL(URL archiveURL, String... portlets) throws Exception {
+        StringBuilder portletPath = new StringBuilder(150);
+        for (String portlet : portlets) {
+            if (null != portlet && portlet.length() > 0) {
+                portletPath.append("/");
+                portletPath.append(portlet);
+            }
+        }
+        URL url = archiveURL.toURI().resolve(GateInDeploymentEnricher.EMBED_PATH + portletPath.toString()).toURL();
+        return url;
     }
 
 }
