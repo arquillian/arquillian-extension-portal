@@ -20,17 +20,14 @@
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
             <artifactId>arquillian-portal-api</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
             <artifactId>arquillian-portal-spi</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-portal-impl</artifactId>
-            <version>${project.version}</version>
+            <artifactId>arquillian-portal-impl-base</artifactId>
         </dependency>
     </dependencies>
 </project>
