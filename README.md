@@ -16,6 +16,7 @@ Currently it supports:
 
 As part of the extension we provide implementations for the following portlet containers:
 * GateIn
+* Pluto
 
 ### Code example
 ---

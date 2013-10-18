@@ -3,18 +3,19 @@
 
     <!-- Parent -->
     <parent>
-        <groupId>org.jboss.portletbridge.testing.pluto</groupId>
-        <artifactId>pluto-testing-parent</artifactId>
-        <version>1.0.0.Final-SNAPSHOT</version>
+        <groupId>org.jboss.arquillian.extension</groupId>
+        <artifactId>arquillian-portal-impl-pluto-parent</artifactId>
+        <version>1.1.0.Final-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <!-- Model Version -->
     <modelVersion>4.0.0</modelVersion>
 
     <!-- Artifact Configuration -->
-    <artifactId>pluto-extension-jsf</artifactId>
+    <artifactId>arquillian-portal-impl-pluto-jsf</artifactId>
     <packaging>jar</packaging>
-    <name>Extension of Pluto Container to support JSF 2</name>
+    <name>Arquillian Portal Extension Implementation for Pluto, Extension to support JSF 2</name>
 
     <dependencies>
         <dependency>

@@ -21,10 +21,14 @@
     <description>Extension for portlet testing in portal containers</description>
 
     <properties>
-        <!-- Versioning -->
         <version.arquillian.core>1.1.1.Final</version.arquillian.core>
         <version.shrinkwrap>1.1.2</version.shrinkwrap>
         <version.shrinkwrap.descriptor>2.0.0-alpha-5</version.shrinkwrap.descriptor>
+
+        <version.mojarra2>2.1.26</version.mojarra2>
+        <version.servlet>3.1.0</version.servlet>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <developers>
@@ -61,11 +65,39 @@
         <module>portal/spi</module>
         <module>portal/impl/impl-base</module>
         <module>portal/impl/impl-gatein</module>
+        <module>portal/impl/impl-pluto</module>
         <module>portal/depchain</module>
     </modules>
 
     <build>
         <plugins>
+            <!-- Enforce Maven Environment -->
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-maven-environment</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <rules>
+                        <requireMavenVersion>
+                            <version>[3.0.4,)</version>
+                        </requireMavenVersion>
+                        <requireJavaVersion>
+                            <version>1.6.0</version> <!-- Must be JDK6 -->
+                        </requireJavaVersion>
+                        <requireProperty>
+                            <property>env.JAVA_HOME</property>
+                            <message>"JAVA_HOME needs to be set to compile"</message>
+                        </requireProperty>
+                    </rules>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
@@ -99,6 +131,21 @@
                 <groupId>javax.portlet</groupId>
                 <artifactId>portlet-api</artifactId>
                 <version>2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${version.servlet}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.faces</groupId>
+                <artifactId>jsf-api</artifactId>
+                <version>${version.mojarra2}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.faces</groupId>
+                <artifactId>jsf-impl</artifactId>
+                <version>${version.mojarra2}</version>
             </dependency>
 
             <dependency>
