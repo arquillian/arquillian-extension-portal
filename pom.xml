@@ -59,6 +59,7 @@
 
     <!-- Modules -->
     <modules>
+        <module>build-resources</module>
         <module>shrinkwrap/api</module>
         <module>shrinkwrap/impl</module>
         <module>portal/api</module>
