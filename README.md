@@ -15,8 +15,8 @@ Currently it supports:
 * `@PortalTest` marker annotation on test class to allow special processing by container specific implementations
 
 As part of the extension we provide implementations for the following portlet containers:
-* GateIn
-* Pluto
+* [GateIn](/portal/impl/impl-gatein/README.md)
+* [Pluto](/portal/impl/impl-pluto/README.md)
 
 ### Code example
 ---
