@@ -1,0 +1,22 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+    xml:lang="en" lang="en">
+    <h:head>
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <p id="input">
+                <h:inputText value="${bean.text}" />
+            </p>
+            <p id="output">
+                <h:outputText value="${bean.text}" />
+            </p>
+            <p id="submit">
+                <h:commandButton value="Ok" />
+            </p>
+        </h:form>
+        <p id="messages">
+            <h:messages />
+        </p>
+    </h:body>
+</f:view>
