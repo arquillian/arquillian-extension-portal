@@ -4,4 +4,6 @@
 .classpath
 .settings
 target
+arquillian-settings
+phantomjsdriver.log
 
