@@ -1,0 +1,13 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+    xml:lang="en" lang="en">
+    <h:head>
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <h:inputText id="input" value="#{bean.text}" />
+            <h:outputText id="output" value="#{bean.text}" />
+            <h:commandButton id="submit" value="Ok" action="#{bean.submit}" />
+        </h:form>
+    </h:body>
+</f:view>

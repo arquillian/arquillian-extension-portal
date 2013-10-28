@@ -1,1 +1,1 @@
-org.jboss.arquillian.warp.portlet.jsf.WarpPortletJSFExtension
+org.jboss.arquillian.portal.warp.jsf.WarpPortletJSFExtension

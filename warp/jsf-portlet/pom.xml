@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.jboss.arquillian.extension</groupId>
         <artifactId>arquillian-portal-parent</artifactId>
-        <version>1.0.0.Final-SNAPSHOT</version>
+        <version>1.1.0.Final-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -14,13 +14,31 @@
     <dependencies>
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-portal-warp-api</artifactId>
+            <artifactId>arquillian-portal-warp-portlet</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
             <artifactId>arquillian-warp-jsf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.container</groupId>
+            <artifactId>arquillian-container-test-spi</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.portlet</groupId>
+            <artifactId>portlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
