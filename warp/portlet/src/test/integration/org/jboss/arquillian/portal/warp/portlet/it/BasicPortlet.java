@@ -14,24 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.arquillian.portal.warp;
+package org.jboss.arquillian.portal.warp.portlet.it;
 
-import org.jboss.arquillian.warp.spi.WarpLifecycleTest;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.portlet.*;
+import java.io.IOException;
 
 /**
  * @author <a href="http://community.jboss.org/people/kenfinni">Ken Finnigan</a>
  */
-@Documented
-@Retention(RUNTIME)
-@Target(ElementType.METHOD)
-@WarpLifecycleTest
-public @interface BeforePortletPhase {
-    Phase value();
+public class BasicPortlet extends GenericPortlet {
+    public static final String ACTION = "action performed";
+
+    @Override
+    public void processAction(ActionRequest request, ActionResponse response) throws PortletException, IOException {
+        response.setRenderParameter("data", ACTION);
+    }
+
+    @Override
+    protected void doView(RenderRequest request, RenderResponse response) throws PortletException, IOException {
+        PortletRequestDispatcher prd = getPortletContext().getRequestDispatcher("/basic.jsp");
+        prd.include(request, response);
+    }
 }

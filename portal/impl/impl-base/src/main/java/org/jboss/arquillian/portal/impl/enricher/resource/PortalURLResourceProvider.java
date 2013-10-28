@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source.
- * Copyright 2012, Red Hat, Inc., and individual contributors
+ * Copyright 2013, Red Hat, Inc., and individual contributors
  * as indicated by the @author tags. See the copyright.txt file in the
  * distribution for a full listing of individual contributors.
  *
@@ -21,6 +21,7 @@ import java.net.URL;
 import java.util.Collection;
 
 import org.jboss.arquillian.container.test.impl.enricher.resource.URLResourceProvider;
+import org.jboss.arquillian.core.api.Injector;
 import org.jboss.arquillian.core.api.Instance;
 import org.jboss.arquillian.core.api.annotation.Inject;
 import org.jboss.arquillian.core.spi.ServiceLoader;
@@ -28,11 +29,19 @@ import org.jboss.arquillian.portal.api.PortalURL;
 import org.jboss.arquillian.portal.impl.PortletArchiveMetadata;
 import org.jboss.arquillian.portal.spi.enricher.resource.PortalURLProvider;
 import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.arquillian.test.spi.TestClass;
+import org.jboss.arquillian.test.spi.enricher.resource.ResourceProvider;
 
 /**
  * @author <a href="mailto:ken@kenfinnigan.me">Ken Finnigan</a>
  */
-public class PortalURLResourceProvider extends URLResourceProvider {
+public class PortalURLResourceProvider implements ResourceProvider {
+
+    @Inject
+    private Instance<Injector> injector;
+
+    @Inject
+    private Instance<TestClass> testClass;
 
     @Inject
     Instance<ServiceLoader> loader;
@@ -40,8 +49,15 @@ public class PortalURLResourceProvider extends URLResourceProvider {
     @Inject
     Instance<PortletArchiveMetadata> portletMetadata;
 
+    private URLResourceProvider urlResourceProvider = new URLResourceProvider();
+
     @Override
-    public Object doLookup(ArquillianResource resource, Annotation... qualifiers) {
+    public boolean canProvide(Class<?> type) {
+        return URL.class.isAssignableFrom(type);
+    }
+
+    @Override
+    public Object lookup(ArquillianResource resource, Annotation... qualifiers) {
         boolean found = false;
         PortalURL portalURL = null;
         for (Annotation annotation : qualifiers) {
@@ -53,14 +69,24 @@ public class PortalURLResourceProvider extends URLResourceProvider {
         }
 
         if (!found) {
-            return super.doLookup(resource, qualifiers);
+            return lookupBaseUrl(resource, qualifiers);
         }
 
         return locateURL(resource, qualifiers, portalURL);
     }
 
+    protected Object lookupBaseUrl(ArquillianResource resource, Annotation... qualifiers) {
+        injector().inject(urlResourceProvider);
+
+        return urlResourceProvider.lookup(resource, qualifiers);
+    }
+
+    protected Injector injector() {
+        return injector.get();
+    }
+
     private Object locateURL(ArquillianResource resource, Annotation[] qualifiers, PortalURL portalURL) {
-        return toURL((URL) super.doLookup(resource, qualifiers), portalURL);
+        return toURL((URL) lookupBaseUrl(resource, qualifiers), portalURL);
     }
 
     private URL toURL(URL original, PortalURL portalURL) {

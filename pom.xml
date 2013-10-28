@@ -24,7 +24,7 @@
         <version.junit>4.11</version.junit>
         <version.arquillian.core>1.1.1.Final</version.arquillian.core>
         <version.arquillian.graphene>2.0.0.Final</version.arquillian.graphene>
-        <version.arquillian.warp>1.0.0.Alpha4</version.arquillian.warp>
+        <version.arquillian.warp>1.0.0.Beta1-SNAPSHOT</version.arquillian.warp>
         <version.shrinkwrap>1.1.2</version.shrinkwrap>
         <version.shrinkwrap.descriptor>2.0.0-alpha-5</version.shrinkwrap.descriptor>
         <version.shrinkwrap.resolver>2.0.0</version.shrinkwrap.resolver>
@@ -163,28 +163,39 @@
                 <groupId>org.jboss.shrinkwrap.descriptors</groupId>
                 <artifactId>shrinkwrap-descriptors-bom</artifactId>
                 <version>${version.shrinkwrap.descriptor}</version>
-                <scope>import</scope>
                 <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.jboss.shrinkwrap.resolver</groupId>
                 <artifactId>shrinkwrap-resolver-bom</artifactId>
                 <version>${version.shrinkwrap.resolver}</version>
-                <scope>import</scope>
                 <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
                 <version>${version.arquillian.core}</version>
-                <scope>import</scope>
                 <type>pom</type>
+                <scope>import</scope>
             </dependency>
+
+            <!-- Graphene -->
             <dependency>
                 <groupId>org.jboss.arquillian.graphene</groupId>
                 <artifactId>graphene-webdriver</artifactId>
                 <version>${version.arquillian.graphene}</version>
                 <type>pom</type>
+            </dependency>
+
+            <!-- Warp -->
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-warp-bom</artifactId>
+                <version>${version.arquillian.warp}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <dependency>
@@ -221,15 +232,6 @@
                 <groupId>org.jboss.portletbridge</groupId>
                 <artifactId>portletbridge-impl</artifactId>
                 <version>${version.portletbridge}</version>
-            </dependency>
-
-            <!-- Warp -->
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-warp-bom</artifactId>
-                <version>${version.arquillian.warp}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

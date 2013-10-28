@@ -14,24 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.arquillian.portal.warp;
+package org.jboss.arquillian.portal.warp.portlet;
 
-import org.jboss.arquillian.warp.spi.WarpLifecycleTest;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import org.jboss.arquillian.portal.api.PortalTest;
 
 /**
  * @author <a href="http://community.jboss.org/people/kenfinni">Ken Finnigan</a>
  */
-@Documented
-@Retention(RUNTIME)
-@Target(ElementType.METHOD)
-@WarpLifecycleTest
-public @interface BeforePortletPhase {
-    Phase value();
+public final class PortalWarpCommons {
+
+    private PortalWarpCommons() {
+        // Hide default constructor
+    }
+
+    /**
+     * Checks whether either given class or its superclasses are annoated with {@link PortalTest} annotation indicating that the
+     * Warp is used in the test.
+     */
+    public static boolean isPortalTest(Class<?> testClass) {
+        Class<?> clazz = testClass;
+        while (clazz != null) {
+            if (clazz.isAnnotationPresent(PortalTest.class)) {
+                return true;
+            }
+            clazz = clazz.getSuperclass();
+        }
+        return false;
+    }
 }

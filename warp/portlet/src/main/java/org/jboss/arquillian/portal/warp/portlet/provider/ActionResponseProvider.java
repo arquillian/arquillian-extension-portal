@@ -14,24 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.arquillian.portal.warp;
+package org.jboss.arquillian.portal.warp.portlet.provider;
 
-import org.jboss.arquillian.warp.spi.WarpLifecycleTest;
+import org.jboss.arquillian.core.api.Instance;
+import org.jboss.arquillian.core.api.annotation.Inject;
+import org.jboss.arquillian.test.api.ArquillianResource;
+import org.jboss.arquillian.test.spi.enricher.resource.ResourceProvider;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.portlet.ActionResponse;
+import java.lang.annotation.Annotation;
 
 /**
  * @author <a href="http://community.jboss.org/people/kenfinni">Ken Finnigan</a>
  */
-@Documented
-@Retention(RUNTIME)
-@Target(ElementType.METHOD)
-@WarpLifecycleTest
-public @interface BeforePortletPhase {
-    Phase value();
+public class ActionResponseProvider implements ResourceProvider {
+
+    @Inject
+    private Instance<ActionResponse> request;
+
+    @Override
+    public boolean canProvide(Class<?> type) {
+        return type == ActionResponse.class;
+    }
+
+    @Override
+    public Object lookup(ArquillianResource resource, Annotation... qualifiers) {
+        return request.get();
+    }
 }

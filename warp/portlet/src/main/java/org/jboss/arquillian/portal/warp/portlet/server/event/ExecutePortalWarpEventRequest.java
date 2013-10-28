@@ -14,24 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.arquillian.portal.warp;
-
-import org.jboss.arquillian.warp.spi.WarpLifecycleTest;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+package org.jboss.arquillian.portal.warp.portlet.server.event;
 
 /**
  * @author <a href="http://community.jboss.org/people/kenfinni">Ken Finnigan</a>
  */
-@Documented
-@Retention(RUNTIME)
-@Target(ElementType.METHOD)
-@WarpLifecycleTest
-public @interface BeforePortletPhase {
-    Phase value();
+public class ExecutePortalWarpEventRequest {
 }
