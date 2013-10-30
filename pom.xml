@@ -24,7 +24,7 @@
         <version.junit>4.11</version.junit>
         <version.arquillian.core>1.1.1.Final</version.arquillian.core>
         <version.arquillian.graphene>2.0.0.Final</version.arquillian.graphene>
-        <version.arquillian.warp>1.0.0.Beta1-SNAPSHOT</version.arquillian.warp>
+        <version.arquillian.warp>1.0.0.Alpha5</version.arquillian.warp>
         <version.shrinkwrap>1.1.2</version.shrinkwrap>
         <version.shrinkwrap.descriptor>2.0.0-alpha-5</version.shrinkwrap.descriptor>
         <version.shrinkwrap.resolver>2.0.0</version.shrinkwrap.resolver>
