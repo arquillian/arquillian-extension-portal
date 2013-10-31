@@ -15,7 +15,7 @@
     <!-- Artifact Configuration -->
     <groupId>org.jboss.arquillian.extension</groupId>
     <artifactId>arquillian-portal-parent</artifactId>
-    <version>1.1.0.Alpha1</version>
+    <version>1.1.0.Final-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Arquillian Portal Extension Agreggator</name>
     <description>Extension for portlet testing in portal containers</description>
@@ -70,7 +70,7 @@
         <connection>scm:git:git@github.com:arquillian/arquillian-extension-portal.git</connection>
         <developerConnection>scm:git:git@github.com:arquillian/arquillian-extension-portal.git</developerConnection>
         <url>https://github.com/arquillian/arquillian-extension-portal.git</url>
-      <tag>1.1.0.Alpha1</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <!-- Modules -->

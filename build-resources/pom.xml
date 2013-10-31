@@ -3,7 +3,7 @@
 
     <groupId>org.jboss.arquillian.extension</groupId>
     <artifactId>arquillian-portal-build-resources</artifactId>
-    <version>1.1.0.Alpha1</version>
+    <version>1.1.0.Final-SNAPSHOT</version>
     <name>Arquillian Portal Extension Build Resources</name>
 
     <description>Resources that are necessary for building Arquillian Portal Extension (used by plugins, tests, etc)</description>
@@ -33,7 +33,7 @@
         <connection>scm:git:git@github.com:arquillian/arquillian-extension-portal.git</connection>
         <developerConnection>scm:git:git@github.com:arquillian/arquillian-extension-portal.git</developerConnection>
         <url>https://github.com/arquillian/arquillian-extension-portal</url>
-        <tag>1.1.0.Alpha1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <build>
