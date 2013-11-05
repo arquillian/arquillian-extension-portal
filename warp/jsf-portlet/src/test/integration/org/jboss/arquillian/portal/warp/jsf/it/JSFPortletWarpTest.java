@@ -33,10 +33,6 @@ import org.jboss.arquillian.warp.jsf.AfterPhase;
 import org.jboss.arquillian.warp.jsf.BeforePhase;
 import org.jboss.arquillian.warp.jsf.Phase;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
-import org.jboss.shrinkwrap.descriptor.api.webcommon30.WebAppVersionType;
 import org.jboss.shrinkwrap.portal.api.PortletArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
@@ -78,11 +74,6 @@ public class JSFPortletWarpTest {
                 .addClass(Bean.class)
                 .addAsLibraries(libs);
 
-//        WebAppDescriptor webXml = Descriptors.create(WebAppDescriptor.class)
-//                .addDefaultNamespaces()
-//                .version(WebAppVersionType._3_0);
-//
-//        archive.setWebXML(new StringAsset(webXml.exportAsString()));
         return archive;
     }
 
